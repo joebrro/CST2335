@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,27 +11,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Look at my GUI"
-        android:textSize="30dp"/>
+        android:textSize="30dp" />
 
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill">
+
         <Button
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="50"
+            android:layout_weight="1"
             android:text="CLICK HERE" />
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:text="Check this Out!"/>
-
+            android:layout_weight="1"
+            android:text="Check this Out!" />
 
     </LinearLayout>
 
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/flag" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text="Switch on / off               " />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type Here"
+        android:inputType="textPersonName" />
 
 
 </LinearLayout>
