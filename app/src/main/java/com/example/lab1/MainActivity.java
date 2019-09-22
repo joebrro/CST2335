@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Switch simpleSwitch = (Switch) findViewById(R.id.switchButton);
         // check current state of a Switch (true or false).
         Boolean switchState = simpleSwitch.isChecked();
+        simpleSwitch.setChecked(true);
 //        simpleSwitch.setTextOn("On"); // displayed text of the Switch whenever it is in checked or on state
 //        simpleSwitch.setTextOff("Off"); // displayed text of the Switch whenever it is in unchecked i.e. off state
 
