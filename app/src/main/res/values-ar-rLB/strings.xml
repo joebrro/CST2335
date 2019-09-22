@@ -3,4 +3,5 @@
     <string name="app_name">Lab1</string>
     <string name="hello_message">marhabah</string>
     <string name="ButtonText">ana button</string>
+    <string name="textPersonName" translatable="true">anna ismeh malak joe</string>
 </resources>

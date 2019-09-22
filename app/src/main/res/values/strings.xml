@@ -2,5 +2,6 @@
     <string name="app_name">Lab1</string>
     <string name="hello_message">Hello World!</string>
 <!--    <string name="neww">new</string>-->
+    <string name="textPersonName" >my name is kingJoe</string>
     <string name="ButtonText">I\'m a button</string>
-</resources>
+    </resources>
