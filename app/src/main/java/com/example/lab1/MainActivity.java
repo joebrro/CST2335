@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.util.log;
 import android.view.View;
-import android.view.view;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -53,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
         // initiate a Switch
         Switch simpleSwitch = (Switch) findViewById(R.id.switchButton);
-        simpleSwitch.setTextOn("On"); // displayed text of the Switch whenever it is in checked or on state
-        simpleSwitch.setTextOff("Off"); // displayed text of the Switch whenever it is in unchecked i.e. off state
+        // check current state of a Switch (true or false).
+        Boolean switchState = simpleSwitch.isChecked();
+//        simpleSwitch.setTextOn("On"); // displayed text of the Switch whenever it is in checked or on state
+//        simpleSwitch.setTextOff("Off"); // displayed text of the Switch whenever it is in unchecked i.e. off state
 
         EditText input = findViewById(R.id.textView2);
 
