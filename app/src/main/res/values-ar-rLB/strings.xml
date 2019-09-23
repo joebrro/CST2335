@@ -4,4 +4,8 @@
     <string name="hello_message">marhabah</string>
     <string name="ButtonText">ana button</string>
     <string name="textPersonName" translatable="true">anna ismeh malak joe</string>
+    <string name="switchOnOff">Ikbus mdawah/mitfeh               </string>
+    <string name="CheckThisOut">tuhaqiq mn hdha!</string>
+    <string name="clickHere">Ikbush 7onah</string>
+    <string name="lookAtMyGUI">itala3 bi taba3i ill GUI</string>
 </resources>

@@ -16,7 +16,7 @@ tools:context="com.example.AndroidDevelopmentClass.Catalog.StartActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="Look at my GUI"
+        android:text="@string/lookAtMyGUI"
         android:textSize="30dp" />
 
     <Button
@@ -26,7 +26,7 @@ tools:context="com.example.AndroidDevelopmentClass.Catalog.StartActivity">
         android:layout_below="@id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:text="CLICK HERE" />
+        android:text="@string/clickHere" />
 
     <CheckBox
         android:id="@+id/checkbox"
@@ -35,7 +35,7 @@ tools:context="com.example.AndroidDevelopmentClass.Catalog.StartActivity">
         android:layout_below="@id/textView"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
-        android:text="Check this Out!" />
+        android:text="@string/CheckThisOut" />
 
 
     <ImageButton
@@ -52,7 +52,7 @@ tools:context="com.example.AndroidDevelopmentClass.Catalog.StartActivity">
         android:layout_height="wrap_content"
         android:layout_below="@id/checkbox"
         android:layout_toEndOf="@id/imageButton"
-        android:text="Switch on / off               " />
+        android:text="@string/switchOnOff" />
 
     <EditText
         android:id="@+id/textView2"
