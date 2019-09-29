@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("useremail", editText.getText().toString());
             editor.putBoolean("logged_in", true);
-
+            editor.apply();
             editor.commit();
 
 
