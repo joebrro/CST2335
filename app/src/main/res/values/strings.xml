@@ -1,11 +1,22 @@
 <resources>
     <string name="app_name">Lab1</string>
     <string name="hello_message">Hello World!</string>
-<!--    <string name="neww">new</string>-->
     <string name="textPersonName" >Type here</string>
     <string name="ButtonText">I\'m a button</string>
     <string name="switchOnOff">Switch on / off               </string>
     <string name="CheckThisOut">Check this out!</string>
     <string name="clickHere">CLICK HERE</string>
     <string name="lookAtMyGUI">Look at my GUI</string>
+    <string name="EnterYourEmailAddress">Enter your email address:</string>
+    <string name="TypeEmailHere">Type email here</string>
+    <string name="TypeYourPass">Type your password:</string>
+    <string name="login">LOGIN</string>
+    <string name="yProfile">Your profile</string>
+    <string name="yName">Your name:</string>
+    <string name="enterYourName">Enter your name</string>
+    <string name="yEmail">Your email:</string>
+    <string name="enterYourEmail">Enter your email</string>
+    <string name="yPic">Your picture:</string>
+    <string name="picButton"></string>
+    <string name="clickButtAbvToTakePic">Click the button above to take a picture</string>
     </resources>

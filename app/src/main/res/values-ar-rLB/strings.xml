@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Lab1</string>
-    <string name="hello_message">marhabah</string>
-    <string name="ButtonText">ana button</string>
-    <string name="textPersonName" translatable="true">anna ismeh malak joe</string>
-    <string name="switchOnOff">Ikbus mdawah/mitfeh               </string>
-    <string name="CheckThisOut">tuhaqiq mn hdha!</string>
-    <string name="clickHere">Ikbush 7onah</string>
-    <string name="lookAtMyGUI">itala3 bi taba3i ill GUI</string>
+    <string name="hello_message">مرحبا بالعالم!</string>
+    <string name="textPersonName" >أكتب هنا</string>
+    <string name="ButtonText">أنا زر</string>
+    <string name="switchOnOff">تشغيل / إيقاف               </string>
+    <string name="CheckThisOut">تحقق من هذا!</string>
+    <string name="clickHere">انقر هنا</string>
+    <string name="lookAtMyGUI">انظر إلى واجهة المستخدم الرسومية الخاصة بي</string>
+    <string name="EnterYourEmailAddress">أدخل عنوان بريدك الالكتروني:</string>
+    <string name="TypeEmailHere">اكتب البريد الإلكتروني هنا</string>
+    <string name="TypeYourPass">اكتب كلمة المرور الخاصة بك:</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="yProfile">إنهاء</string>
+    <string name="yName">إنهاء</string>
+    <string name="enterYourName">إنهاء</string>
+    <string name="yEmail">إنهاء</string>
+    <string name="enterYourEmail">إنهاء</string>
+    <string name="yPic">إنهاء</string>
+    <string name="picButton">إنهاء</string>
+    <string name="clickButtAbvToTakePic">إنهاء</string>
+
+
+
 </resources>

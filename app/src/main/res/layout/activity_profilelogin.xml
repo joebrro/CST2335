@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textViewp1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yProfile" />
+
+    <TextView
+        android:id="@+id/textViewp2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yName" />
+
+    <EditText
+        android:id="@+id/editViewp1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enterYourName"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewp3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yEmail" />
+
+    <EditText
+        android:id="@+id/editViewp2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enterYourEmail"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/textViewp4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yPic" />
+
+    <ImageButton
+        android:id="@+id/picButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/picButton"
+        android:src="@android:drawable/picture_frame"/>
+
+    <TextView
+        android:id="@+id/textViewp5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clickButtAbvToTakePic" />
+</LinearLayout>
