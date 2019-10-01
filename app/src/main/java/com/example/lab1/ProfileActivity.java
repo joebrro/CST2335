@@ -33,16 +33,24 @@ public class ProfileActivity extends AppCompatActivity {
 //    }
     private EditText editText;
     private EditText editText2;
+    private ImageView mImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profilelogin);
-        Log.i(ACTIVITY_NAME, "onCreate()");
+        Log.e(ACTIVITY_NAME, "onCreate()");
+
+        String email = getIntent().getStringExtra("emailAddress");
 
 
+        mImageButton = findViewById(R.id.picButton);
         editText = (EditText) findViewById(R.id.editViewp1);
         editText2 = (EditText) findViewById(R.id.editViewp2);
+
+//        editText.setText(email);
+        editText2.setText(email);
+
 
 //        Intent intent = new Intent(Intent.ACTION_SEND);
 //        intent.setType("text/plain");
@@ -56,15 +64,6 @@ public class ProfileActivity extends AppCompatActivity {
         ImageButton page2Button = (ImageButton) findViewById(R.id.picButton);
         if (page2Button != null)
             page2Button.setOnClickListener(v -> {
-                Intent goToPage2 = new Intent(ProfileActivity.this, MainActivity.class);
-
-                goToPage2.setType("text/plain");
-                goToPage2.putExtra(Intent.EXTRA_EMAIL, new String[]{"email@example.com"});
-                goToPage2.putExtra(Intent.EXTRA_SUBJECT, "subject here");
-                goToPage2.putExtra(Intent.EXTRA_TEXT, "body text");
-                startActivity(goToPage2);
-
-                startActivityForResult(goToPage2, 30);
                 dispatchTakePictureIntent();
 
             });
@@ -88,20 +87,20 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 30) {
-            Log.i(ACTIVITY_NAME, "Returned to StartActivity.onActivityResult");
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            Log.e(ACTIVITY_NAME, "Returned to StartActivity.onActivityResult");
         }
-        if (resultCode == Activity.RESULT_OK) {
-            String messagePassed = data.getStringExtra("Response");
-            Toast.makeText(getApplicationContext(), getString(R.string.enterYourEmail) + messagePassed, Toast.LENGTH_LONG).show();
-        }
+//        if (resultCode == Activity.RESULT_OK) {
+//            String messagePassed = data.getStringExtra("Response");
+//            Toast.makeText(getApplicationContext(), getString(R.string.enterYourEmail) + messagePassed, Toast.LENGTH_LONG).show();
+//        }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView mImageButton = null;
+//            ImageView mImageButton = null;
             mImageButton.setImageBitmap(imageBitmap);
-            dispatchTakePictureIntent();
+
         }
     }
 

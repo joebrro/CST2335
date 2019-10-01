@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TEXT = "text";
     private String text;
     private String text2;
-
+    public SharedPreferences prefs;
 
 
 
@@ -50,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+//        prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("useremail", editText.getText().toString());
+//            editor.putBoolean("logged_in", true);
+//        editor.apply();
+        editor.commit();
 
     }
 
@@ -58,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
+        prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
         textView = (TextView) findViewById(R.id.textLogin1);
         textView2 = (TextView) findViewById(R.id.textLogin2);
         editText = (EditText) findViewById(R.id.editView);
@@ -65,23 +73,20 @@ public class MainActivity extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.buttonLogin);
 
 
-
-        SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
         String previous = prefs.getString("useremail", "Default Value");
 
         editText.setText(previous);
         editText2.setText(previous);
 
         saveButton.setOnClickListener(clk -> {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("useremail", editText.getText().toString());
-            editor.putBoolean("logged_in", true);
-            editor.apply();
-            editor.commit();
+//            SharedPreferences.Editor editor = prefs.edit();
+//            editor.putString("useremail", editText.getText().toString());
+            Intent editor = new Intent(MainActivity.this, ProfileActivity.class);
+            editor.putExtra("emailAddress", editText.getText().toString());
+            startActivity(editor);
 
 
         });
-
 
 
 
@@ -167,3 +172,11 @@ public class MainActivity extends AppCompatActivity {
 //                Intent goToPage2 = new Intent(MainActivity.this, ProfileActivity.class);
 //                startActivity(goToPage2);
 //            });
+
+
+
+
+
+
+
+
