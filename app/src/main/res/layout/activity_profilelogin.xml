@@ -55,4 +55,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/clickButtAbvToTakePic" />
+
+    <Button
+        android:id="@+id/chatBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chatBtnTxt" />
 </LinearLayout>

@@ -63,5 +63,4 @@
         android:hint="@string/textPersonName"
         android:inputType="textPersonName" />
 
-
 </LinearLayout>

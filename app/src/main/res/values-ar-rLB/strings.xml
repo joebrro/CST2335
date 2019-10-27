@@ -20,7 +20,10 @@
     <string name="yPic">إنهاء</string>
     <string name="picButton">إنهاء</string>
     <string name="clickButtAbvToTakePic">إنهاء</string>
+    <string name="chatBtnTxt">اذهب إلى الدردشة</string>
 
-
-
+    //ChatRoomActivity
+    <string name="sendBtnTxt">إرسال النص</string>
+    <string name="chatHintTxt">الدردشة للذهاب</string>
+    <string name="receiveBtnTxt">النص تلقي</string>
 </resources>

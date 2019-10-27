@@ -1,3 +1,6 @@
+
+
+
 package com.example.lab1;
 
 import android.app.Activity;
@@ -24,129 +27,71 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    public static final String ACTIVITY_NAME = "ProfileActivity";
+    protected static final String ACTIVITY_NAME = "ProfileActivity";
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    //    @Override
-//    public SharedPreferences getPreferences(int mode) {
-//        return super.getPreferences(mode);
-//    }
     private EditText editText;
     private EditText editText2;
     private ImageView mImageButton;
+    private Button chatButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profilelogin);
-        Log.e(ACTIVITY_NAME, "onCreate()");
 
         String email = getIntent().getStringExtra("emailAddress");
 
-
-        mImageButton = findViewById(R.id.picButton);
+        mImageButton = (ImageView)findViewById(R.id.picButton);
         editText = (EditText) findViewById(R.id.editViewp1);
         editText2 = (EditText) findViewById(R.id.editViewp2);
+        chatButton = (Button) findViewById(R.id.chatBtn);
 
-//        editText.setText(email);
+        //        editText.setText(email);
+
         editText2.setText(email);
 
+        mImageButton = findViewById(R.id.picButton);
+        mImageButton.setOnClickListener(new View.OnClickListener() {
+            final int REQUEST_IMAGE_CAPTURE = 1;
+            @Override
+            public void onClick(View view) {
 
-//        Intent intent = new Intent(Intent.ACTION_SEND);
-//        intent.setType("text/plain");
-//        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"email@example.com"});
-//        intent.putExtra(Intent.EXTRA_SUBJECT, "subject here");
-//        intent.putExtra(Intent.EXTRA_TEXT, "body text");
-//        startActivity(intent);
-
-
-        //find button 1 from what was loaded, add a click listener
-        ImageButton page2Button = (ImageButton) findViewById(R.id.picButton);
-        if (page2Button != null)
-            page2Button.setOnClickListener(v -> {
                 dispatchTakePictureIntent();
+            }
 
-            });
+            private void dispatchTakePictureIntent(){
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
 
+        });
 
-////        Button save = findViewById(R.id.saveButton);
-////        save.setOnClickListener( bt -> {
-////            startActivity(new Intent(ProfileActivity.this, .class));
-////        });
-//
-//        Button picButt = findViewById(R.id.picButton);
-//        picButt.setOnClickListener(clk -> {
-//
-//
-//            finish();
-//        });
+        Button chat = findViewById(R.id.chatBtn);
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this,ChatRoomActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        Log.e(ACTIVITY_NAME, "In onCreate()");
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            Log.e(ACTIVITY_NAME, "Returned to StartActivity.onActivityResult");
-        }
-//        if (resultCode == Activity.RESULT_OK) {
-//            String messagePassed = data.getStringExtra("Response");
-//            Toast.makeText(getApplicationContext(), getString(R.string.enterYourEmail) + messagePassed, Toast.LENGTH_LONG).show();
-//        }
-
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            ImageView mImageButton = null;
             mImageButton.setImageBitmap(imageBitmap);
-
         }
-    }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e(ACTIVITY_NAME, "onResume()");
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e(ACTIVITY_NAME, "onStart()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.e(ACTIVITY_NAME, "onStop()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e(ACTIVITY_NAME, "onRestart()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.e(ACTIVITY_NAME, "onPause()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(ACTIVITY_NAME, "onDestroy()");
+        Log.e(ACTIVITY_NAME, "In onActivityResult()");
     }
 
 }
+
+
