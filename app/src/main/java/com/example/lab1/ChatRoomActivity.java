@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 import android.content.ContentValues;
@@ -28,12 +31,14 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 
     protected static final String ACTIVITY_NAME = "ChatRoomActivity";
+    ArrayList<mess> messages = new ArrayList<>( );
 
-    private ArrayList<Message> chatMessage = new ArrayList<>();
-    protected EditText chatEditText;
-    private MyDatabaseActivity db;
-    private SQLiteDatabase dbHelper;
-    ArrayAdapter arrayAdapter;
+    BaseAdapter myAdapter;
+
+
+    private MyDatabaseActivity dbHelper;
+    private SQLiteDatabase db;
+
 
 
     @Override
@@ -41,81 +46,43 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chatroom);
 
-
+        ListView theList = findViewById(R.id.chat_lv);
         Button sendButton = findViewById(R.id.send_btn);
-        Button recieveButton = findViewById(R.id.receive_btn);
-        ListView listView = findViewById(R.id.chat_lv);
-        chatEditText = findViewById(R.id.chat_et); //used in inner class
+        Button receiveButton = findViewById(R.id.receive_btn);
 
         dbHelper = new MyDatabaseActivity(this);
-        db = dbHelper.getWritabeleDtabase();
+        db = dbHelper.getWritableDatabase();
 
         String [] columns = {MyDatabaseActivity.COL_ID, MyDatabaseActivity.COL_MESSAGE, MyDatabaseActivity.COL_IS_SEND};
         Cursor results = db.query(false, MyDatabaseActivity.TABLE_NAME, columns, null, null, null, null, null, null);
 
-        final ChatAdapter chatAdapter = new ChatAdapter(this);
-        listView.setAdapter(chatAdapter);
         printCursor(results);
 
-        Button btnSend = findViewById(R.id.send_btn);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chatMessage.add(new Message(chatEditText.getText().toString(), Message.SEND));
-                chatAdapter.notifyDataSetChanged();
-                chatEditText.setText("");
-            }
-        });
+        int messageColumnIndex = results.getColumnIndex(MyDatabaseActivity.COL_MESSAGE);
+        int isSendColIndex = results.getColumnIndex(MyDatabaseActivity.COL_IS_SEND);
+        int idColIndex = results.getColumnIndex(MyDatabaseActivity.COL_ID);
 
-        int messageColIndx = results.getColumnIndex(MyDatabaseActivity.COL_MESSAGE);
-        int idColIndx = results.getColumnIndex(MyDatabaseActivity.COL_ID);
-        int sendColIndx = results.getColumnIndex(MyDatabaseActivity.COL_IS_SEND);
-        Button btnReceive = findViewById(R.id.receive_btn);
-        btnReceive.setOnClickListener(new View.OnClickListener() {
+        while(results.moveToNext())
+        {
+            String message = results.getString(messageColumnIndex);
+            boolean is = Boolean.parseBoolean(results.getString(isSendColIndex));
+            long id = results.getLong(idColIndex);
 
-
-            @Override
-            public void onClick(View view) {
-                chatMessage.add(new Message(chatEditText.getText().toString(), Message.RECEIVE));
-                chatAdapter.notifyDataSetChanged();
-                chatEditText.setText("");
-            }
-        });
-
-        while (results.moveToNext()){
-            String msg = results.getString(messageColIndx);
-            long sin = results.getLong(idColIndx);
-            boolean sendMsg = Boolean.parseBoolean(results.getString(sendColIndx));
-            double sins = results.getLong(idColIndx);
-            chatMessage.add(new Message(msg, sin, sendMsg));
+            messages.add(new mess(message, is, id));
         }
 
-        listView.setAdapter(arrayAdapter = new ChatAdapter());
+        theList.setAdapter( myAdapter = new MyListAdapter() );
 
-        sendButton.setOnClickListener(click -> setMessage(true));
 
-        recieveButton.setOnClickListener(click -> setMessage(false));
+        sendButton.setOnClickListener( click -> setMessage(true));
+        receiveButton.setOnClickListener( click -> setMessage(false));
 
     }
 
-//Delegate(Delegation) pattern
-//inner class ChatAdapter to provide data for the List View
-
-    private void setMessage(boolean sendMsg){
-        EditText editText = findViewById(R.id.chat_et);
-        if(!editText.getText().toString().equals("")){
-
-            chatMessage.add(addDBMessage(sendMsg));
-            myAdapter.notifyDataSetChanged(); //update yourself
-            editText.setText("");
-
-        }
-    }
-
-    private Message addDBMessage(boolean sendMsg){
+    private mess messDB(boolean is){
         EditText editText = findViewById(R.id.chat_et);
         String message = editText.getText().toString();
-        String strIsSend = Boolean.toString(sendMsg);
+        String strIsSend = Boolean.toString(is);
 
         //add to the database and get the new ID
         ContentValues newRowValues = new ContentValues();
@@ -126,49 +93,97 @@ public class ChatRoomActivity extends AppCompatActivity {
         //insert in the database:
         long newId = db.insert(MyDatabaseActivity.TABLE_NAME, null, newRowValues);
 
-        return new Message(sendMsg, sendMsg, newId);
+        return new mess(message, is, newId);
     }
-    public class ChatAdapter extends ArrayAdapter<Message>{
+    private void setMessage(boolean is){
+        EditText editText = findViewById(R.id.chat_et);
+        if(!editText.getText().toString().equals("")){
 
-        public ChatAdapter(ChatRoomActivity context){
-            super(context,0);
+            messages.add(messDB(is));
+            myAdapter.notifyDataSetChanged(); //update yourself
+            editText.setText("");
         }
+    }
+    private class mess{
 
-        @Override
-        public Message getItem(int position) {
-            return chatMessage.get(position);
+        long id;
+        String message;
+        boolean is;
+
+        mess(String message, boolean is, long id){
+            this.message=message;
+            this.is = is;
+            this.id = id;
         }
+    }
 
-        @Override
-        public long getItemId(int position) {
-            return position;
+
+    private class MyListAdapter extends BaseAdapter {
+
+        public int getCount() { return messages.size();  }
+
+        public mess getItem(int position) { return messages.get(position);  }
+
+        public long getItemId(int p) { return p; }
+
+        public View getView(int p, View recycled, ViewGroup parent)
+        {
+            View thisRow = recycled;
+
+            if(recycled == null)
+                thisRow = getLayoutInflater().inflate(R.layout.table_main_layout, null);
+
+            defineMessage(thisRow, getItem(p).message,getItem(p).is);
+
+            return thisRow;
         }
+    }
 
-        @Override
-        public int getCount() {
-            return chatMessage.size();
+    private void defineMessage(View thisRow, String s, boolean is) {
+
+        ImageButton image = thisRow.findViewById(R.id.image_chat);
+        TextView messageText = thisRow.findViewById(R.id.numberField);
+        RelativeLayout.LayoutParams layoutParamsImage = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams layoutParamsMessage = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        //set layout parameters for image
+        layoutParamsImage.addRule(is? RelativeLayout.ALIGN_PARENT_LEFT
+                : RelativeLayout.ALIGN_PARENT_RIGHT);
+        //set layout parameters for message
+        layoutParamsMessage.addRule(is?RelativeLayout.RIGHT_OF:RelativeLayout.LEFT_OF
+                ,thisRow.findViewById(R.id.image_chat).getId());
+        //set image
+        image.setImageResource(is? R.drawable.row_send : R.drawable.row_receive);
+        image.setLayoutParams(layoutParamsImage);
+        //set message
+        messageText.setText(s);
+        messageText.setLayoutParams(layoutParamsMessage);
+    }
+
+    private void printCursor(Cursor c){
+        Log.d("Chat Room", "Database Version NUmber: " + MyDatabaseActivity.VERSION_NUM);
+        Log.d("Chat Room", "Number of Columns: " + c.getColumnCount());
+
+        String colNames = "";
+        for (String colName : c.getColumnNames()) {
+            colNames = colNames + colName + ", ";
         }
+        //clean the last comma
+        Log.d("Chat Room", "Column Names: " + colNames.substring(0,colNames.length() - 2));
 
-        public View getView(int position,View convertView, ViewGroup parent) {
-            LayoutInflater inflater = ChatRoomActivity.this.getLayoutInflater();
-            View view = null;
+        Log.d("Chat Room", "Number of Results in the Cursor: " + c.getCount());
 
-            switch(getItem(position).getMsgType()){
-                case Message.SEND:
-                    view = inflater.inflate(R.layout.layout_main_send, null);
-                    break;
-                case Message.RECEIVE:
-                    view = inflater.inflate(R.layout.layout_main_recieve, null);
-                    break;
+        while(c.moveToNext()){
+            String results = "";
+            for (String colName : c.getColumnNames()) {
+                results = results + c.getString(c.getColumnIndex(colName)) + ", ";
             }
-
-            TextView message = (TextView) view.findViewById(R.id.message_tv_chat);
-
-            message.setText(getItem(position).getMessage());
-
-            return view;
+            Log.d("Chat Room", "Column Names: " + results.substring(0,results.length() - 2));
         }
+
+        c.moveToFirst();
+        c.moveToPrevious();
+
+
     }
 }
-
-
