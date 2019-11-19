@@ -26,4 +26,14 @@
     <string name="sendBtnTxt">إرسال النص</string>
     <string name="chatHintTxt">الدردشة للذهاب</string>
     <string name="receiveBtnTxt">النص تلقي</string>
+    <string name="weatherForcast">الذهاب إلى توقعات الطقس</string>
+
+    //menu
+    <string name="choice_1_str">Choice 1</string>
+    <string name="choice_2_str">Choice 2</string>
+    <string name="choice_3_str">Choice 3</string>
+    <string name="toolbar_test_str">Go to Toolbar page</string>
+    <string name="overflow_choice_str">Overflow Choice</string>
+    <string name="alert_tv_str">What is your new message?</string>
+    <string name="e_text_type_here_str">Type here</string>
 </resources>

@@ -61,4 +61,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/chatBtnTxt" />
+
+    <Button
+        android:id="@+id/weatherforc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/weatherForcast" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarTestButton"
+        android:text="@string/toolbar_test_str" />
 </LinearLayout>

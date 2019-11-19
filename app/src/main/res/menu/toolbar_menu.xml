@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/choice1"
+        android:title="@string/choice_1_str"
+        android:icon="@drawable/icons8_mulled_wine_100"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/choice2"
+        android:icon="@drawable/icons8_iron_man_64"
+        android:title="@string/choice_2_str"
+        android:orderInCategory="2"
+        app:showAsAction="always"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/choice3"
+        android:icon="@drawable/icons8_naruto_64"
+        android:title="@string/choice_3_str"
+        android:orderInCategory="3"
+        app:showAsAction="always"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/overflowChoice"
+        android:title="@string/overflow_choice_str"
+        android:orderInCategory="4"
+        app:showAsAction="never" />
+</menu>

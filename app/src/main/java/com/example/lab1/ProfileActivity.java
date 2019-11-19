@@ -3,25 +3,15 @@
 
 package com.example.lab1;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText editText2;
     private ImageView mImageButton;
     private Button chatButton;
+    private Button wForcast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editViewp1);
         editText2 = (EditText) findViewById(R.id.editViewp2);
         chatButton = (Button) findViewById(R.id.chatBtn);
+        wForcast = (Button) findViewById(R.id.weatherforc);
 
         //        editText.setText(email);
 
@@ -80,7 +72,23 @@ public class ProfileActivity extends AppCompatActivity {
 
         Log.e(ACTIVITY_NAME, "In onCreate()");
 
+        Button weatherForcast = findViewById(R.id.weatherforc);
+        weatherForcast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent weatherActivity = new Intent(ProfileActivity.this, WeatherForecast.class);
+                startActivity(weatherActivity);
+            }
+        });
+
+        Button goToToolbarTest = findViewById(R.id.toolbarTestButton);
+        goToToolbarTest.setOnClickListener(btn -> {
+            Intent goToToolbar = new Intent(ProfileActivity.this, ActvityToolBar.class);
+            startActivity(goToToolbar);
+        });
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
